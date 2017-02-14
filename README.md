@@ -11,9 +11,11 @@ Get pathogen first to help download them (if you want), but you don't really nee
 In order for the font to work it will need to be downloaded as well.
 
 Turn this:
+
 ![Image of shoddy looking vim]
 (https://raw.githubusercontent.com/callumfrance/ms-vim/master/photos/old-vim-css.png)
 
 Into this:
+
 ![Image of hella nice looking vim]
 (https://raw.githubusercontent.com/callumfrance/ms-vim/master/photos/new-vim-css.png)
