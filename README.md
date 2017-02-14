@@ -12,8 +12,8 @@ In order for the font to work it will need to be downloaded as well.
 
 Turn this:
 ![Image of shoddy looking vim]
-(https://github.com/callumfrance/photos/old-vim-css.png)
+(https://raw.githubusercontent.com/callumfrance/ms-vim/master/photos/old-vim-css.png)
 
 Into this:
 ![Image of hella nice looking vim]
-(https://github.com/callumfrance/photos/new-vim-css.png)
+(https://raw.githubusercontent.com/callumfrance/ms-vim/master/photos/new-vim-css.png)
