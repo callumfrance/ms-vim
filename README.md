@@ -9,3 +9,11 @@ The bundles are listed, including links to where to dl them, but are not up here
 Get pathogen first to help download them (if you want), but you don't really need to since you can just download the zip files anyway.
 
 In order for the font to work it will need to be downloaded as well.
+
+Turn this:
+![Image of shoddy looking vim]
+(https://github.com/callumfrance/photos/old-vim-css.png)
+
+Into this:
+![Image of hella nice looking vim]
+(https://github.com/callumfrance/photos/new-vim-css.png)
