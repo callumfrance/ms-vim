@@ -1,3 +1,5 @@
+#These are all the bundles in the bundles folder
+
 * css-color
   * https://github.com/ap/vim-css-color
 * emmet-vim
