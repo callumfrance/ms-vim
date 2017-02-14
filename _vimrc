@@ -19,7 +19,7 @@ filetype plugin indent on
 " }
 
 filetype plugin on
-winpos -5 2
+winpos 9999 2			"vim always opens on RHS screen
 
 " useful tips {
 " `:SCROLL`	followed by UP/DOWN arrow keys will scroll through colour schemes
@@ -54,66 +54,38 @@ set lines=50 columns=70	"might also work
 
 " }
 
-" word processor file types {
+" file types {
 augroup word_processors
 	autocmd!
-	autocmd BufNewFile,BufRead *.md,*.markdown call WP()
+	autocmd BufNewFile,BufRead *.md,*.markdown call LazyWP()
 	autocmd BufNewFile,BufRead *.txt call WP()
-	autocmd BufNewFile,BufRead *.textile call WP()
-	autocmd BufNewFile,BufRead *.rst call WP()
+	autocmd BufNewFile,BufRead *.textile call LazyWP()
+	autocmd BufNewFile,BufRead *.rst call LazyWP()
+
+	autocmd BufNewFile,BufRead *.text let g:limelight_paragraph_span = 1
 
 	autocmd BufNewFile,BufRead *.md,*.markdown call HideUglies(1)
 	autocmd BufNewFile,BufRead *.txt call HideUglies(1)
 	autocmd BufNewFile,BufRead *.textile call HideUglies(1)
 	autocmd BufNewFile,BufRead *.rst call HideUglies(1)
+	autocmd BufNewFile,BufRead *.html call HTMLSettings()
 augroup END
 " }
 
 " html settings {
 let g:user_emmet_install_global = 0
 
-augroup filetype_html
-	autocmd!
-	autocmd BufNewFile,BufRead *.html EmmetInstall
-	autocmd BufNewFile,BufRead *.html colorscheme Tomorrow-Night-Eighties
-	autocmd BufNewFile,BufRead *.html set tabstop=2
-	autocmd BufNewFile,BufRead *.html set foldmethod=syntax
-	autocmd BufNewFile,BufRead *.html syntax spell toplevel
-	autocmd BufNewFile,BufRead *.html syn case ignore
-	autocmd BufNewFile,BufRead *.html syn match htmlError "[<>&]"	"marks illegal character
-augroup END
-" }
-
-" MyDiff function {
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
+function! HTMLSettings() 
+	EmmetInstall
+	set lines=50 columns=92
+	setlocal tabstop=2
+	bufdo colorscheme Tomorrow-Night-Eighties
+	setlocal foldmethod=syntax
+	bufdo syntax spell toplevel
+	bufdo syn case ignore
+	bufdo syn match htmlError "[<>&]"
 endfunction
+
 " }
 
 " vimrc folds organisation {
@@ -122,7 +94,7 @@ set foldmarker={,}
 set foldlevel=0
 " }
 
-" Word proessor mode {
+" Word processor mode {
 " this has been moved to ~\vimfiles\ftplugins
 
 " `:call WP()`		opens the word processor mode
@@ -135,14 +107,28 @@ function WP()
 	setlocal noexpandtab				" lots of spaces together will remain spaces
 	map j gj
 	map k gk
-	setlocal spell spelllang=en_au		" http://vimdoc.sourceforge.net/htmldoc/spell.html
-	setlocal complete+=s
 	setlocal formatprg=par
 	setlocal wrap
 	setlocal linebreak
 	setlocal spellfile=~\vimfiles\spell\en.utf-8.add
+	setlocal spell spelllang=en_au		" http://vimdoc.sourceforge.net/htmldoc/spell.html
+	setlocal complete+=s
 
 	Goyo 85%x85%-2%						" margins
+endfunction
+
+function LazyWP()
+	colorscheme Tomorrow-Night-Bright
+	setlocal lines=65 columns=90
+	setlocal formatoptions=1
+	setlocal noexpandtab
+	map j gj
+	map k gk
+	setlocal formatprg=par
+	setlocal wrap
+	setlocal linebreak
+
+	Goyo 75%x80%-5%
 	Limelight							" greys out unfocused paragraphs
 endfunction
 " }
