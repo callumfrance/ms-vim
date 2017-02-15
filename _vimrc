@@ -94,7 +94,7 @@ set foldmarker={,}
 set foldlevel=0
 " }
 
-" Word processor mode {
+" Word processor modes {
 " this has been moved to ~\vimfiles\ftplugins
 
 " `:call WP()`		opens the word processor mode
@@ -115,6 +115,7 @@ function WP()
 	setlocal complete+=s
 
 	Goyo 85%x85%-2%						" margins
+	Limelight!
 endfunction
 
 function LazyWP()
