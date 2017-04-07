@@ -1,0 +1,25 @@
+if has ("gui_running")
+	set guioptions -=T
+	set guioptions -=m
+
+	" default styling layout {
+	set guifont=Source_Code_Pro_SemiBold:h10:cANSI:qDRAFT "font
+	" }
+
+	" hide gvim ugly UI mode {
+	let g:hide_uglies = 0
+	function! HideUglies(hide_uglies)
+		if a:hide_uglies != 0
+			setlocal guioptions-=m				"removes gvim menubar
+			setlocal guioptions-=T				"removes gvim toolbar
+			setlocal guioptions-=r				"remove right scrollbar
+			echo a:hide_uglies
+		else
+			setlocal guioptions+=m				"removes gvim menubar
+			setlocal guioptions+=T				"removes gvim toolbar
+			setlocal guioptions+=r				"remove right scrollbar
+			echo a:hide_uglies
+		endif
+	endfunction
+	" }
+endif
