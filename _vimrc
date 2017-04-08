@@ -182,7 +182,7 @@ let g:airline_theme='distinguished'
 " indentline settings {
 let g:indentLine_setColors = 1	" 0 or 1 for grey or colourscheme
 "let g:indentLine_color_gui = '#BADA55'
-"let g:indentLine_char = '¦'
+"let g:indentLine_char = 'Â¦'
 " }
 
 " thesaurus_query {
@@ -223,7 +223,7 @@ augroup END
 " folds {
 set foldmethod=marker
 set foldmarker={,}
-set foldlevel=1
+set foldlevel=2
 set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 " }
 " }
