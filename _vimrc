@@ -6,46 +6,94 @@ source $VIMRUNTIME/defaults.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-set encoding=utf-8
 set splitright
 
 " use `zo` to open folds and `zc` to close them
 " use `zO` and `zC` to do the same but for all heirarchies
 
 " pathogen {
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+" execute pathogen#infect()
+" syntax on
+" filetype plugin indent on
 " }
 
-filetype plugin on
+"plugins and vundle {
+" for vundle to work on windows, you need to install Git for Windows
+" you also need to install Curl from the cURL downloads page
+" also make sure that the %HOME% variable is set like ~/. in Unix
+
+"Alternate lines for Windows
+"set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+"call vundle#begin('$HOME/vimfiles/bundle/')
+
+"Let vundle manage vundle
+"Plugin 'VundleVim/Vundle.vim'
+"vundle plugins go here
+"Plugin 'mattn/emmet-vim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'ap/vim-css-color'
+"Plugin 'Yggdroot/indentLine'
+"Plugin 'Ron89/thesaurus_query.vim'
+"Plugin 'reedes/vim-wordy'
+"Plugin 'kana/vim-textobj-user'
+"Plugin 'reedes/vim-textobj-quote'
+"Plugin 'vim-scripts/ScrollColors'
+
+"Plugin 'valloric/youcompleteme'
+
+"Plugin 'junegunn/goyo.vim'
+" Plugin 'junegunn/limelight.vim'
+
+"call vundle#end()
+" }
+
+filetype plugin indent on
 winpos 9999 2			"vim always opens on RHS screen
+
+cabbrev Goyo Goyo 85%x85%-2%
+cabbrev shiba !shiba --detach %
 
 " useful tips {
 " `:SCROLL`	followed by UP/DOWN arrow keys will scroll through colour schemes
 " }
 
+" default styling {
 colorscheme solarized
 
-set antialias										"smooths fonts
+set antialias									"smooths fonts
 set tw=0											" textwidth doesnt wrap
-set number											" page numbering
-set relativenumber
+set relativenumber            "page numbering
 set nowrap
 set tabstop=4
-set smarttab
-set autoindent
 set shiftwidth=4
+set smarttab
+set smartcase
+set autoindent
 set shiftround										"indents rounded to a multiple
 set noexpandtab
+
 set ignorecase		" searching
 set showmatch
 set hlsearch
-set smartcase
+
 set history=100		" history
 set undolevels=100
 set noerrorbells	" error noise
+
 set title
+set modelines=0
+set clipboard=unnamed
+set synmaxcol=128
+set ttyscroll=10
+set encoding=utf-8
+
+set nowritebackup
+set noswapfile
+set nobackup
+
 " set lines=43 columns=80	" from macbook
 set lines=50 columns=70	"might also work
 
@@ -60,17 +108,6 @@ command Q q
 " file types {
 augroup word_processors
 	autocmd!
-"	autocmd BufNewFile,BufRead *.md,*.markdown call LazyWP()
-"	autocmd BufNewFile,BufRead *.txt call WP()
-"	autocmd BufNewFile,BufRead *.textile call LazyWP()
-"	autocmd BufNewFile,BufRead *.rst call LazyWP()
-
-	autocmd BufNewFile,BufRead *.text let g:limelight_paragraph_span = 1
-
-"	autocmd BufNewFile,BufRead *.md,*.markdown call HideUglies(1)
-"	autocmd BufNewFile,BufRead *.txt call HideUglies(1)
-"	autocmd BufNewFile,BufRead *.textile call HideUglies(1)
-"	autocmd BufNewFile,BufRead *.rst call HideUglies(1)
 	autocmd BufNewFile,BufRead *.html call HTMLSettings()
 augroup END
 " }
@@ -91,24 +128,15 @@ endfunction
 
 " }
 
-" vimrc folds organisation {
-set foldmethod=marker
-set foldmarker={,}
-set foldlevel=1
-set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
-" }
 
-" Word processor modes {
-" this has been moved to ~\vimfiles\ftplugins
+" word processor {
 
 " `:call WP()`		opens the word processor mode
 " `z=`				displays corrections
 " `zg`				adds words to dictionary
-function WP()
-	colorscheme pencil
-	setlocal lines=65 columns=90
+function! WP()
+	setlocal noexpandtab        "When the tab key is pressed, inserts a tab and not several spaces
 	setlocal formatoptions=1
-	setlocal noexpandtab				" lots of spaces together will remain spaces
 	map j gj
 	map k gk
 	setlocal formatprg=par
@@ -116,18 +144,20 @@ function WP()
 	setlocal linebreak
 	setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
 	setlocal spell spelllang=en_au		" http://vimdoc.sourceforge.net/htmldoc/spell.html
+  setlocal spell syntax=off
 	setlocal complete+=s
+  retab
 
 	UniCycleOn
-"	Goyo 85%x85%-2%						" margins
-	Limelight!
+	Goyo 85%x85%-2%						" margins
+  
+	colorscheme pencil
+	setlocal lines=65 columns=90
 endfunction
 
-function LazyWP()
-	colorscheme material
-	setlocal lines=65 columns=90
-	setlocal formatoptions=1
+function! LazyWP()
 	setlocal noexpandtab
+	setlocal formatoptions=1
 	map j gj
 	map k gk
 	setlocal formatprg=par
@@ -135,8 +165,9 @@ function LazyWP()
 	setlocal linebreak	" line wraps don't break up words
 
 	UniCycleOn
-"	Goyo 75%x80%-5%
-"	Limelight							" greys out unfocused paragraphs
+
+  colorscheme materialtheme
+	setlocal lines=65 columns=90
 endfunction
 " }
 
@@ -159,16 +190,6 @@ let g:indentLine_setColors = 1	" 0 or 1 for grey or colourscheme
 " :Thesaurus your phrase
 " }
 
-" unicycle {
-" best to use only for certain filetypes
-" utf-8 MUST BE ON
-" -- is en dash; --- is em dash; ---- is back to hyphen-minus
-"  ... is ellipsis
-"  double and single quotes are automatically done
-" :UniCycleOn
-" http://www.vim.org/scripts/script.php?script_id=1384
-" }
-
 " vim-textobj-quote and vim-textobj-user {
 " configure for each filetype
 " https://github.com/reedes/vim-textobj-quote
@@ -181,13 +202,28 @@ augroup textobj_quote
 augroup END
 " }
 
-" goyo.vim {
-" adds margins for word processing in vim
-" https://github.com/junegunn/goyo.vim
+" unicycle {
+" best to use only for certain filetypes
+" utf-8 MUST BE ON
+" -- is en dash; --- is em dash; ---- is back to hyphen-minus
+"  ... is ellipsis
+"  double and single quotes are automatically done
+" :UniCycleOn
+" http://www.vim.org/scripts/script.php?script_id=1384
 " }
 
-" limelight.vim {
-" hyperfocus-writing in vim
-" https://github.com/junegunn/limelight.vim
+" java coding standards - move this to an ftplugin {
+augroup java_standards
+  autocmd!
+  autocmd Filetype java set tabstop=4
+  autocmd Filetype java set shiftwidth=4
+augroup END
+" }
+
+" folds {
+set foldmethod=marker
+set foldmarker={,}
+set foldlevel=1
+set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 " }
 " }

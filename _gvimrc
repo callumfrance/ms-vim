@@ -1,3 +1,4 @@
+" GVIM GUI mode {
 if has ("gui_running")
 	set guioptions -=T
 	set guioptions -=m
@@ -23,3 +24,5 @@ if has ("gui_running")
 	endfunction
 	" }
 endif
+
+" }
