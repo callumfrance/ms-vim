@@ -23,37 +23,40 @@ set splitright
 " also make sure that the %HOME% variable is set like ~/. in Unix
 
 "Alternate lines for Windows
-"set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-"call vundle#begin('$HOME/vimfiles/bundle/')
+set nocompatible
+filetype off
+set rtp+='$Vim/vimfiles/bundle/Vundle.vim'
+call vundle#begin('$Vim/vimfiles/bundle/')
 
 "Let vundle manage vundle
-"Plugin 'VundleVim/Vundle.vim'
-"vundle plugins go here
-"Plugin 'mattn/emmet-vim'
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'flazz/vim-colorschemes'
-"Plugin 'ap/vim-css-color'
-"Plugin 'Yggdroot/indentLine'
-"Plugin 'Ron89/thesaurus_query.vim'
-"Plugin 'reedes/vim-wordy'
-"Plugin 'kana/vim-textobj-user'
-"Plugin 'reedes/vim-textobj-quote'
-"Plugin 'vim-scripts/ScrollColors'
+Plugin 'VundleVim/Vundle.vim'
+" vundle plugins go here
+Plugin 'mattn/emmet-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'ap/vim-css-color'
+Plugin 'Yggdroot/indentLine'
+Plugin 'Ron89/thesaurus_query.vim'
+Plugin 'reedes/vim-wordy'
+Plugin 'kana/vim-textobj-user'
+Plugin 'reedes/vim-textobj-quote'
+Plugin 'vim-scripts/ScrollColors'
 
-"Plugin 'valloric/youcompleteme'
+Plugin 'valloric/youcompleteme'
 
-"Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/goyo.vim'
 " Plugin 'junegunn/limelight.vim'
 
-"call vundle#end()
+call vundle#end()
+filetype plugin indent on
 " }
 
 filetype plugin indent on
 winpos 9999 2			"vim always opens on RHS screen
 
-cabbrev Goyo Goyo 85%x85%-2%
+" cabbrev Goyo Goyo 85%x85%-2%
 cabbrev shiba !shiba --detach %
 
 " useful tips {
@@ -193,13 +196,15 @@ let g:indentLine_setColors = 1	" 0 or 1 for grey or colourscheme
 " vim-textobj-quote and vim-textobj-user {
 " configure for each filetype
 " https://github.com/reedes/vim-textobj-quote
-augroup textobj_quote
-  autocmd!
-  autocmd FileType markdown call textobj#quote#init()
-  autocmd FileType rst call textobj#quote#init()
-  autocmd FileType textile call textobj#quote#init()
-  autocmd FileType text call textobj#quote#init({'educate': 0})
-augroup END
+"
+" these aren't working
+"augroup textobj_quote
+"  autocmd!
+"  autocmd FileType markdown call textobj#quote#init()
+"  autocmd FileType rst call textobj#quote#init()
+"  autocmd FileType textile call textobj#quote#init()
+"  autocmd FileType text call textobj#quote#init({'educate': 0})
+" augroup END
 " }
 
 " unicycle {

@@ -1,2 +1,5 @@
-* pathogen
-  * https://github.com/tpope/vim-pathogen
+* vundle.vim
+* vundle
+	- config.vim
+	- installer.vim
+	- scripts.vim
