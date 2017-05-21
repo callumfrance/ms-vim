@@ -6,8 +6,6 @@ source $VIMRUNTIME/defaults.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-set splitright
-
 " use `zo` to open folds and `zc` to close them
 " use `zO` and `zC` to do the same but for all heirarchies
 
@@ -44,7 +42,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'reedes/vim-textobj-quote'
 Plugin 'vim-scripts/ScrollColors'
 
-Plugin 'valloric/youcompleteme'
+" Plugin 'valloric/youcompleteme'
 
 Plugin 'junegunn/goyo.vim'
 " Plugin 'junegunn/limelight.vim'
@@ -55,6 +53,36 @@ filetype plugin indent on
 
 filetype plugin indent on
 winpos 9999 2			"vim always opens on RHS screen
+
+" omni complete {
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+" inserts the longest common text of the matches, even only for one match
+set completeopt=longest,menuone
+
+" where to look for word completions
+	"buffer, windows, other buffers, unloaded buffers, tags, includes/imports
+	"kspell looks in dictionary when using spelling  
+set complete=.,w,b,u,t,i,kspell 
+" the following change the key mappings of omni complete
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+" inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" this function maps <Tab> to either insert a <Tab> if the current line is
+	" only whitespace, or start/continue a CTRL-N completeion operation
+function! CleverTab()
+	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+		return "\<Tab>"
+	else
+		return "\<C-N>"
+	endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+" }
 
 " cabbrev Goyo Goyo 85%x85%-2%
 cabbrev shiba !shiba --detach %
@@ -68,6 +96,7 @@ colorscheme solarized
 
 set antialias									"smooths fonts
 set tw=0											" textwidth doesnt wrap
+set number
 set relativenumber            "page numbering
 set nowrap
 set tabstop=4
@@ -96,6 +125,10 @@ set encoding=utf-8
 set nowritebackup
 set noswapfile
 set nobackup
+
+" File explorer
+let g:netrw_winsize=40
+" Use :Vexplore to open a file explorer in vertical mode
 
 " set lines=43 columns=80	" from macbook
 set lines=50 columns=70	"might also work
