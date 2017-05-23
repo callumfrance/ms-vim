@@ -1,2 +1,3 @@
 " vim file options
-	colorscheme materialtheme
+    colorscheme materialtheme
+    set foldlevel=1
