@@ -53,7 +53,7 @@ filetype plugin indent on
 " }
 
 filetype plugin indent on
-winpos 9999 2			"vim always opens on RHS screen
+winpos 9999 2           "vim always opens on RHS screen
 
 " omni complete {
 filetype plugin on
@@ -62,25 +62,25 @@ set omnifunc=syntaxcomplete#Complete
 set completeopt=longest,menuone
 
 " where to look for word completions
-	"buffer, windows, other buffers, unloaded buffers, tags, includes/imports
-	"kspell looks in dictionary when using spelling  
+    "buffer, windows, other buffers, unloaded buffers, tags, includes/imports
+    "kspell looks in dictionary when using spelling  
 set complete=.,w,b,u,t,i,kspell 
 " the following change the key mappings of omni complete
-inoremap <expr> <CR>	   pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Down>	   pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>	   pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-" inoremap <expr> <Esc>		 pumvisible() ? "\<C-e>" : "\<Esc>"
+" inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
 
 " this function maps <Tab> to either insert a <Tab> if the current line is
-	" only whitespace, or start/continue a CTRL-N completeion operation
+    " only whitespace, or start/continue a CTRL-N completeion operation
 function! CleverTab()
-	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-		return "\<Tab>"
-	else
-		return "\<C-N>"
-	endif
+    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+        return "\<Tab>"
+    else
+        return "\<C-N>"
+    endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 " }
@@ -88,10 +88,10 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " default styling {
 colorscheme solarized
 
-set antialias									"smooths fonts
-set tw=0											" textwidth doesnt wrap
+set antialias                                   "smooths fonts
+set tw=0                                            " textwidth doesnt wrap
 set number
-set relativenumber			  "page numbering
+set relativenumber            "page numbering
 set nowrap
 set smarttab
 set smartcase
@@ -99,16 +99,16 @@ set smartcase
 " use 4 spaces for tabs
 set tabstop=4 softtabstop=4 shiftwidth=4
 set autoindent
-set shiftround		"indents rounded to a multiple
+set shiftround      "indents rounded to a multiple
 set noexpandtab
 
-set ignorecase		" searching
+set ignorecase      " searching
 set showmatch
 set hlsearch
 
-set history=100		" history
+set history=100     " history
 set undolevels=100
-set noerrorbells	" error noise
+set noerrorbells    " error noise
 
 set title
 set modelines=0
@@ -130,7 +130,7 @@ let g:netrw_banner=0 " removes the useless banner up the top
 " Use :Vexplore to open a file explorer in vertical mode
 " }
 
-set lines=50 columns=70 "might also work
+set lines=50 columns=79 "might also work
 
 " mappings {
 nnoremap ; :
@@ -148,58 +148,59 @@ nnoremap <bs> <C-W>W
 
 " word processor {
 
-" `:call WP()`		opens the word processor mode
-" `z=`				displays corrections
-" `zg`				adds words to dictionary
+" `:call WP()`      opens the word processor mode
+" `z=`              displays corrections
+" `zg`              adds words to dictionary
 function! WP()
-	setlocal noexpandtab		"When the tab key is pressed, inserts a tab and not several spaces
-	setlocal formatoptions=1
-	map j gj
-	map k gk
-	setlocal formatprg=par
-	setlocal wrap
-	setlocal linebreak
-	setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
-	setlocal spell spelllang=en_au		" http://vimdoc.sourceforge.net/htmldoc/spell.html
+    setlocal noexpandtab        "When the tab key is pressed, inserts a tab and not several spaces
+    setlocal formatoptions=1
+    map j gj
+    map k gk
+    setlocal formatprg=par
+    setlocal wrap
+    setlocal linebreak
+    setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
+    setlocal spell spelllang=en_au      " http://vimdoc.sourceforge.net/htmldoc/spell.html
   setlocal spell syntax=off
-	setlocal complete+=s
+    setlocal complete+=s
   retab
 
-	UniCycleOn
-	Goyo 85%x85%-2%						" margins
-	" Wordy weak " plugin for some proofreading
+    UniCycleOn
+    Goyo 85%x85%-2%                     " margins
+    " Wordy weak " plugin for some proofreading
   
-	colorscheme pencil
-	setlocal lines=65 columns=90
+    colorscheme pencil
+    setlocal lines=65 columns=90
 endfunction
 
 function! LazyWP()
-	setlocal noexpandtab
-	setlocal formatoptions=1
-	map j gj
-	map k gk
-	setlocal formatprg=par
-	setlocal wrap
-	setlocal linebreak	" line wraps don't break up words
+    setlocal noexpandtab
+    setlocal formatoptions=1
+    map j gj
+    map k gk
+    setlocal formatprg=par
+    setlocal wrap
+    setlocal linebreak  " line wraps don't break up words
 
-	UniCycleOn
-	" Wordy redundant " plugin for some light proofreading
+    UniCycleOn
+    " Wordy redundant " plugin for some light proofreading
 
   colorscheme materialtheme
-	setlocal lines=65 columns=90
+    setlocal lines=65 columns=90
 endfunction
 " }
 
 " airline tabs {
+let g:airline_section_b = '%{strftime("%c")}'
+let g:airline_section_y = 'BN: %{bufnr("%")}'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamecollapse=1		" collapses parent directories in buffer name
-let g:airline#extensions#tabline#fnamemode = ':t'		" shows tail of file name		
-let g:airline#extensions#branch#format = 1				" only shows file name
+let g:airline#extensions#tabline#fnamemode = ':t'       " shows tail of file name       
+let g:airline#extensions#branch#format = 1              " only shows file name
 let g:airline_theme='distinguished'
 " }
 
 " indentline settings {
-let g:indentLine_setColors = 1	" 0 or 1 for grey or colourscheme
+let g:indentLine_setColors = 1  " 0 or 1 for grey or colourscheme
 "let g:indentLine_color_gui = '#BADA55'
 "let g:indentLine_char = '¦'
 " }
@@ -209,24 +210,27 @@ let g:indentLine_setColors = 1	" 0 or 1 for grey or colourscheme
 set list listchars=tab:\|\ 
 
 " convert spaces to tabs when reading file
-autocmd! bufreadpost * set noexpandtab | retab! 4
+let fts = ['txt', 'md', 'text']
+if index(fts, &filetype) != -1
+    autocmd! bufreadpost * set noexpandtab | retab! 4
 
-" convert tabs to spaces before writing file
-autocmd! bufwritepre * set expandtab | retab! 4
+    " convert tabs to spaces before writing file
+    autocmd! bufwritepre * set expandtab | retab! 4
 
-" convert spaces to tabs after writing file (to show guides again)
-autocmd! bufwritepost * set noexpandtab | retab! 4
+    " convert spaces to tabs after writing file (to show guides again)
+    autocmd! bufwritepost * set noexpandtab | retab! 4
+endif
 " }
 
 " syntastic for noobs {
-	set statusline+=%#warningmsg#
-	set statusline+=%{SyntasticStatuslineFlag()}
-	set statusline+=%*
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
-	let g:syntastic_always_populate_loc_list = 1
-	let g:syntastic_auto_loc_list = 1
-	let g:syntastic_check_on_open = 1
-	let g:syntastic_check_on_wq = 0
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_check_on_wq = 0 " file is not checked when quitted
+    let g:syntastic_aggregate_errors = 1 " aggregates and displays all errors
+    let g:syntastic_loc_list_height = 3 " location list window height
 " }
 
 " unicycle {
