@@ -54,6 +54,7 @@ filetype plugin indent on
 
 filetype plugin indent on
 winpos 9999 2           "vim always opens on RHS screen
+set lines=50 columns=80 "might also work
 
 " omni complete {
 filetype plugin on
@@ -129,8 +130,6 @@ let g:netrw_browse_split=4 " opens in previous tab
 let g:netrw_banner=0 " removes the useless banner up the top
 " Use :Vexplore to open a file explorer in vertical mode
 " }
-
-set lines=50 columns=79 "might also work
 
 " mappings {
 nnoremap ; :
