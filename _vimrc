@@ -32,7 +32,7 @@ Plugin 'ap/vim-css-color'
 " Plugin 'Yggdroot/indentLine'
 Plugin 'Ron89/thesaurus_query.vim'
 Plugin 'vim-scripts/ScrollColors'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 
 Plugin 'junegunn/goyo.vim'
 " Plugin 'junegunn/limelight.vim'
@@ -65,7 +65,7 @@ set completeopt=longest,menuone
 " where to look for word completions
     "buffer, windows, other buffers, unloaded buffers, tags, includes/imports
     "kspell looks in dictionary when using spelling  
-set complete=.,w,b,u,t,i,kspell 
+set complete=.,w,b,u,t,i
 " the following change the key mappings of omni complete
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
@@ -124,21 +124,22 @@ set nobackup
 " }
 
 " File explorer {
-let g:netrw_winsize=40
-let g:netrw_altv = 1 " open from the right
-let g:netrw_browse_split=4 " opens in previous tab
-let g:netrw_banner=0 " removes the useless banner up the top
+ let g:netrw_winsize=40
+" let g:netrw_altv = 1 " open from the right
+" let g:netrw_browse_split=4 " opens in previous tab
+ let g:netrw_banner=0 " removes the useless banner up the top
 " Use :Vexplore to open a file explorer in vertical mode
 " }
 
 " mappings {
 nnoremap ; :
+nnoremap <space> :w<CR>:nohl<CR>
 command WQ wq
 command Wq wq
 command W w
 command Q q
 " maps the F3 key to file viewer
-nnoremap <F3> :Vexplore<CR> 
+nnoremap <F3> :Explore<CR> 
 " maps normal-mode <tab> key to switching windows
 nnoremap <tab> <C-W>w
 " normal-mode backspace to switch into other direction
@@ -190,10 +191,10 @@ endfunction
 " }
 
 " airline tabs {
-let g:airline_section_b = '%{strftime("%c")}'
-let g:airline_section_y = 'BN: %{bufnr("%")}'
+"let g:airline_section_b = '%{strftime("%c")}'
+"let g:airline_section_y = 'BN: %{bufnr("%")}'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemode = ':t'       " shows tail of file name       
+" let g:airline#extensions#tabline#fnamemode = ':t'       " shows tail of file name       
 let g:airline#extensions#branch#format = 1              " only shows file name
 let g:airline_theme='distinguished'
 " }
@@ -206,7 +207,7 @@ let g:indentLine_setColors = 1  " 0 or 1 for grey or colourscheme
 
 " native indentation guides {
 " display indentation guides
-set list listchars=tab:\|\ 
+set list listchars=tab:\|\ ,trail:·
 
 " convert spaces to tabs when reading file
 let fts = ['txt', 'md', 'text']
@@ -222,14 +223,14 @@ endif
 " }
 
 " syntastic for noobs {
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+    "set statusline+=%#warningmsg#
+    "set statusline+=%{SyntasticStatuslineFlag()}
+    " set statusline+=%*
 
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_check_on_wq = 0 " file is not checked when quitted
-    let g:syntastic_aggregate_errors = 1 " aggregates and displays all errors
-    let g:syntastic_loc_list_height = 3 " location list window height
+  "  let g:syntastic_always_populate_loc_list = 1
+   " let g:syntastic_check_on_wq = 0 " file is not checked when quitted
+    " let g:syntastic_aggregate_errors = 1 " aggregates and displays all errors
+   " let g:syntastic_loc_list_height = 3 " location list window height
 " }
 
 " unicycle {

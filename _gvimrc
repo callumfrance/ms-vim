@@ -5,6 +5,7 @@ if has ("gui_running")
 
 	" default styling layout {
 	set guifont=Source_Code_Pro_SemiBold:h10:cANSI:qDRAFT "font
+	set guicursor+=n-v-c:blinkon0		" disable cursor blink in n-v-c modes
 	" }
 
 	" hide gvim ugly UI mode {
