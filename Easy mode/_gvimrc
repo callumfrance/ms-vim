@@ -1,0 +1,31 @@
+"This is another configuration file like '_vimrc', but for graphics
+"Nothing in this file can run in terminal-based vim
+
+if has("gui_running")
+	set guifont=Source_Code_Pro_SemiBold:h10:cANSI:qDRAFT	
+		"The font settings gvim will use
+	set guicursor+=n-v-c:blinkon0
+		"Disables the cursor blink in normal, visual, and command-line modes
+
+	"setlocal guioptions-=m				"removes gvim menubar
+	"setlocal guioptions-=T				"removes gvim toolbar
+	"setlocal guioptions-=r				"remove right scrollbar
+
+"This function allows you to Show toolbars, scrollbars, and menubars
+"	Use ':call Show(0)' or ':call show(1)' to switch between modes
+	let g:show_uglies = 0						"Can be '1' or '0'
+	function! Show(show_uglies)
+		if a:show_uglies != 0
+			setlocal guioptions-=m				"removes gvim menubar
+			setlocal guioptions-=T				"removes gvim toolbar
+			setlocal guioptions-=r				"remove right scrollbar
+			echo a:show_uglies
+		else		":call Show(1)
+			setlocal guioptions+=m				"adds gvim menubar
+			setlocal guioptions+=T				"adds gvim toolbar
+			setlocal guioptions+=r				"adds right scrollbar
+			echo a:show_uglies
+		endif
+	endfunction
+	" }
+endif

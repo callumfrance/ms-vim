@@ -1,0 +1,63 @@
+" Place this file in your vim directory
+	" C:\Program Files (x86)\Vim
+	" i.e. :
+
+" ($HOME\_vimrc on Windows)
+source $VIMRUNTIME/defaults.vim
+source $VIMRUNTIME/mswin.vim
+
+
+set lines=50 columns=80 "when you open a file, these are the window dimensions in characters
+colorscheme default		"change this to the colorscheme you want to use
+
+
+"Default Styling
+set antialias			"when using gvim, this uses 'smoooth' fonts
+set number				"enables line numbers
+set nowrap				"text does not wrap to a new line when restricted by window size
+set noerrorbells		"Vim never makes an annoying beeping noise when hitting the wrong key
+					"try 'set errorbells' and see what I mean
+set visualbell			"blinks the screen when there is an error, like errorbells
+					"use 'set novisualbell' if you don't want the screen flash
+set title				"displays title
+set encoding=utf-8		"uses UTF-8
+behave mswin	"mouse and selection behaves like microsoft windows 
+set smarttab			"for info run ':help smarttab'
+set smartcase			"for info run ':help smartcase'
+
+
+"Searches
+"	(note: you can run a search in normal mode by typing a '/'
+set ignorecase			"searches will ignore case
+set showmatch
+set hlsearch			"highlights all matches of a search'
+
+"History
+"	to undo, press 'u' in normal mode
+"	to redo, press CTRL + 'r'
+set history=100
+set undolevels=100		"number of undos saved
+
+
+" Mappings
+"	Uncomment to make spacebar save and remove search hlighting in normal mode:
+"		nnoremap <space> :w<CR>:nohl<CR>
+
+
+" Indentation and Trailing Space Markers
+set list listchars=tab:\|\ ,trail:·
+	"Comment out the above if you don't want visual representations of indents
+	"This line also displays trailing spaces with a '·'
+
+
+" Convert spaces to tabs when reading a file
+let fts = ['txt', 'md', 'text']					"if the file is not a word-type file
+if index(fts, &filetype) != -1
+    autocmd! bufreadpost * set noexpandtab | retab! 4
+
+    " convert tabs to spaces before writing file
+    autocmd! bufwritepre * set expandtab | retab! 4
+
+    " convert spaces to tabs after writing file (to show guides again)
+    autocmd! bufwritepost * set noexpandtab | retab! 4
+endif

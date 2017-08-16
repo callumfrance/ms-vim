@@ -1,0 +1,40 @@
+1. Download vim
+	http://www.vim.org/download.php#pc
+
+2. Install vim
+
+3. Ensure that you can open gVim.
+
+	gVim should open up like any other PC application - it's not terminal.
+
+4. Ensure that 'C:\Program Files (x86)\Vim' exists.
+	
+	If not, check 'C:\Program Files\' to see if there is a Vim folder.
+
+	If there is no Vim folder, simply make a new folder called 'Vim' 
+	and place it in the 'Program File (x86)' directory.
+
+5. Copy '_vimrc' and '_gvimrc' and put them in the 'Vim' file
+
+6. Relaunch the gVim application.
+
+
+It should all be working now.
+
+
+
+
+
+7. Read through the '_vimrc' and be sure to edit
+	
+	'colorscheme'
+	'columns' and 'lines'
+	'visualbell'
+	
+	try commenting out
+	line 48 (listchars)
+	line 18 (errorbells)
+
+8. Adjust text size and font on line 5 of gvimrc
+
+	Try uncommenting lines 10 - 12 in gvimrc
