@@ -99,6 +99,10 @@ set incsearch 				" don't constantly update search
 set ignorecase
 set smartcase
 set showmatch 				" briefly jump to matching bracket
+set path+=**				" searches down into subfolders
+" Note - use :find *<partOfFileName>	
+"		or :find <partOfFileName>* to fuzzy search a name
+" :b <unique_part_of_file_name>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => History
@@ -167,6 +171,22 @@ autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_con
 " => Omni complete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" find info in |ins-completion|
+" ^x^n for just the file
+" ^x^f for filenames
+" ^x^] for tags only
+" ^n for anything specified by the 'complete' option
+" (use ^n and ^p to go back and forth in the suggested list)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ctags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Note - this will only work if the PC has 'ctags' on it
+" https://github.com/universal-ctags/ctags
+command! MakeTags !ctags -R .
+	" use ^] to jump to tag under cursor
+	" use g^] for ambiguous tags
+	" use ^t to jump back up tag stack
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin: Airline Settings
@@ -229,3 +249,25 @@ function! LazyWP()
 		setlocal lines=65 columns=90
 	endif
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Some Note
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Register Usage
+"	vim automatically uses the " register when yanking/deleting etc
+
+" "add
+" "bdd
+" "ap
+" "bp
+
+" + and * register connect to system keyboard
+" "+yy
+" <paste somewhere out of vim normally>
+
+
+" Help
+" :help i_^n
+	" show what control-n does in insert mode
+" :helpgrep windows
+	" finds every possible entry for 'windows' in entire manual
