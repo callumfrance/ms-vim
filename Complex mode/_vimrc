@@ -85,7 +85,7 @@ set shiftround				" indents rounded to a multiple
 if has("win32")
 	set laststatus=2			" always displays the status line
 	" Format the status line
-	set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+	" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 endif
 
 " display indentation guides
@@ -117,7 +117,7 @@ set nobackup
 " => Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " this is the default mapleader anyway, but for posterity:
-let mapleader="\"
+let mapleader="\\"
 
 nnoremap ; :
 nnoremap <space> :w<CR>:nohl<CR>
@@ -271,3 +271,4 @@ endfunction
 	" show what control-n does in insert mode
 " :helpgrep windows
 	" finds every possible entry for 'windows' in entire manual
+
