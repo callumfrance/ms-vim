@@ -30,7 +30,7 @@ if has("gui_running")
 	autocmd VimResized * wincmd = 
 
 	" fullscreen options
-	set fuoptions=maxvert, maxhorz
+	" set fuoptions=maxvert, maxhorz
 		" set lines to max number of lines able to fit on screen
 		" set columns to max number of columns able to fit on screen
 
@@ -70,4 +70,5 @@ if has("gui_macvim")
 	winpos 740 0
 	" Hack looks gross for some reason
 	set guifont=Monaco:h13
+	set guicursor+=n-v-c:blinkon0		" cursor doesn't blink
 endif
