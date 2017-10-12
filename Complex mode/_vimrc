@@ -158,7 +158,7 @@ endfun
 
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-    autocmd BufWritePre *.txt,*.md,*.tex :call LazyWP()
+    " autocmd BufWritePre *.txt,*.md,*.tex :call LazyWP()
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -204,6 +204,7 @@ let g:airline_theme='distinguished'
 function! WP()
     setlocal noexpandtab        "When the tab key is pressed, inserts a tab and not several spaces
     setlocal formatoptions=an1
+	set colorcolumn=
 		"a = automatic formatting of paragraphs
 		"n = recognises lists
 		"1 = don't break line after a one-letter word
@@ -212,7 +213,7 @@ function! WP()
 
 	if has("gui_macvim")		" only works in unix systems
 		setlocal formatprg=par
-		setlocal guifont=Moncao:h12
+		setlocal guifont=Monaco:h12
 		colorscheme Benokai
 		setlocal lines=42 columns=83
 	else
@@ -240,6 +241,7 @@ function! LazyWP()
     setlocal formatprg=par
     setlocal wrap
     setlocal linebreak			" line wraps don't break up words
+	set colorcolumn=
 
 	if has("gui_macvim")
 		setlocal lines=41 columns=65
@@ -271,4 +273,3 @@ endfunction
 	" show what control-n does in insert mode
 " :helpgrep windows
 	" finds every possible entry for 'windows' in entire manual
-
