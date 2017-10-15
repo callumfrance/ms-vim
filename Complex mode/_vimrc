@@ -33,6 +33,8 @@ Plugin 'ap/vim-css-color'				" css hex colour highlighting
 Plugin 'junegunn/goyo.vim'				" Comfortable page spacing
 Plugin 'ajh17/VimCompletesMe'			" Code completion
 Plugin 'lervag/vimtex'					"LaTeX settings for vim
+Plugin 'majutsushi/tagbar'				"tag sidebar
+Plugin 'w0rp/ale'						"linter
 
 call vundle#end()
 filetype plugin indent on
@@ -43,6 +45,7 @@ filetype plugin indent on
 " => Styling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
+set colorcolumn=80
 set background=dark
 syntax enable
 set number
@@ -64,7 +67,7 @@ set t_vb=
 if has("gui_macvim")
 	set lines=40 columns=75
 else
-	set lines=50 columns=80
+	set lines=55 columns=80
 	winpos 9999 2
 endif
 
@@ -221,6 +224,9 @@ function! WP()
 		setlocal lines=65 columns=90
 	endif
 
+	set guioptions-=r
+	set guioptions-=l
+
     setlocal wrap
     setlocal linebreak
     setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
@@ -248,9 +254,29 @@ function! LazyWP()
 		colorscheme gruvbox
 	else
 		colorscheme materialtheme
-		setlocal lines=65 columns=90
+		" setlocal lines=65 columns=90
 	endif
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tagbar_left=1			" thingy is on the left not right
+let g:tagbar_expand=1		" increases window width
+
+nnoremap <silent> <F6> :TagbarToggle<CR>
+nnoremap <silent> <F5> :TagbarOpenAutoClose<CR>
+
+autocmd FileType c,java,python nested :call tagbar#autoopen(1)
+	"nested :TagbarOpen
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ALE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#ale#enable=1
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Some Note
