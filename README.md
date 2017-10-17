@@ -7,3 +7,5 @@ This suppository only caters for `$MYVIMRC` and for the files within `\vim\vimfi
 To install the bundles, simply run `:PluginInstall` from inside vim. This uses Vundle to install/update all plugins listed in the vimrc. Then, simply relaunch the application.
 
 In order for the font to work it will need to be downloaded as well. The font used is Hack for Windows and Monaco for Apple. Source Code Pro is also another great font alternative.
+
+![the best vim logo](https://github.com/callumfrance/vim-settings/vim3d_the_editor.jpg)
