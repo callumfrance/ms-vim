@@ -274,6 +274,7 @@ autocmd FileType c,java,python nested :call tagbar#autoopen(1)
 " => ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#ale#enable=1
+let g:ale_completion_delay=1000
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
