@@ -8,4 +8,4 @@ To install the bundles, simply run `:PluginInstall` from inside vim. This uses V
 
 In order for the font to work it will need to be downloaded as well. The font used is Hack for Windows and Monaco for Apple. Source Code Pro is also another great font alternative.
 
-![the best vim logo](https://github.com/callumfrance/vim-settings/vim3d_the_editor.jpg)
+![the best vim logo](https://github.com/callumfrance/vim-settings/blob/master/vim3d_the_editor.jpg)
