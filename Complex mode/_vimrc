@@ -205,17 +205,27 @@ let g:airline_theme='distinguished'
 " `z=`              displays corrections
 " `zg`              adds words to dictionary
 function! WP()
-    setlocal noexpandtab        "When the tab key is pressed, inserts a tab and not several spaces
-    setlocal formatoptions=an1
-	set colorcolumn=
-		"a = automatic formatting of paragraphs
-		"n = recognises lists
-		"1 = don't break line after a one-letter word
+    setlocal noexpandtab
+    setlocal formatoptions=1
     map j gj
     map k gk
+    setlocal formatprg=par
+    setlocal wrap
+    setlocal linebreak			" line wraps don't break up words
+	set colorcolumn=
 
-	if has("gui_macvim")		" only works in unix systems
-		setlocal formatprg=par
+	set guioptions-=r
+	set guioptions-=l
+
+    setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
+    setlocal spell spelllang=en_au      " http://vimdoc.sourceforge.net/htmldoc/spell.html
+	setlocal syntax=off
+	retab
+
+    Goyo 95%x95%-2%             " margins
+
+	if has("gui_macvim")
+		" setlocal formatprg=par
 		setlocal guifont=Monaco:h12
 		colorscheme Benokai
 		setlocal lines=42 columns=83
@@ -223,20 +233,6 @@ function! WP()
 		colorscheme pencil
 		setlocal lines=65 columns=90
 	endif
-
-	set guioptions-=r
-	set guioptions-=l
-
-    setlocal wrap
-    setlocal linebreak
-    setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
-    setlocal spell spelllang=en_au      " http://vimdoc.sourceforge.net/htmldoc/spell.html
-	setlocal syntax=off
-	retab
-
-    Goyo 95%x95%-2%             " margins
-  
-	setlocal tw=90
 endfunction
 
 function! LazyWP()
@@ -267,14 +263,14 @@ let g:tagbar_expand=1		" increases window width
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <silent> <F5> :TagbarOpenAutoClose<CR>
 
-autocmd FileType c,java,python nested :call tagbar#autoopen(1)
+" autocmd FileType c,java,python nested :call tagbar#autoopen(1)
 	"nested :TagbarOpen
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#ale#enable=1
-let g:ale_completion_delay=1000
+let g:ale_completion_delay=1
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
