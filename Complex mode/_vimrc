@@ -16,10 +16,11 @@ endif
 filetype off
 if has("gui_macvim")
 	set rtp+=~/.vim/bundle/Vundle.vim				" used for mac
+	call vundle#begin()
 else
-	set rtp+='$Vim/vimfiles/bundle/Vundle.vim' 		" used for windows
+	set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
+	call vundle#begin('$HOME/.vim/bundle/')
 endif
-call vundle#begin()
 
 "Let vundle manage vundle
 Plugin 'VundleVim/Vundle.vim'
