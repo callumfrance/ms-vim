@@ -5,7 +5,7 @@ Of course, for any of this to work the latest version of vim (GVIM, MacVIM, VIM)
 This suppository only caters for `$MYVIMRC` and for the files within `\vim\vimfiles\`. The `vimXX` e.g. `\vim80\` file has not been altered, and so it has not been placed here.
 
 
-Before the 'complex' settings will work, [Vundle|https://github.com/VundleVim/Vundle.vim] will need to be installed.
+Before the 'complex' settings will work, [Vundle](https://github.com/VundleVim/Vundle.vim) will need to be installed.
 To install the bundles, simply run `:PluginInstall` from inside vim. This uses Vundle to install/update all plugins listed in the vimrc. Then, simply relaunch the application.
 
 
