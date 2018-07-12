@@ -36,9 +36,11 @@ Plugin 'ajh17/VimCompletesMe'			" Code completion
 Plugin 'lervag/vimtex'					"LaTeX settings for vim
 Plugin 'majutsushi/tagbar'				"tag sidebar
 Plugin 'w0rp/ale'						"linter
+Plugin 'dart-lang/dart-vim-plugin'		"support for Dart language syntax
 
 call vundle#end()
 filetype plugin indent on
+filetype plugin on
 
 " Plugin 'Ron89/thesaurus_query.vim'
 
@@ -93,7 +95,7 @@ if has("win32")
 endif
 
 " display indentation guides
-set list listchars=tab:\|\ ,trail:Â·
+set list listchars=tab:\|\ ,trail:·
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Searching
@@ -161,8 +163,8 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-    " autocmd BufWritePre *.txt,*.md,*.tex :call LazyWP()
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee, *dart :call CleanExtraSpaces()
+    autocmd BufWritePre *.md, :call LazyWP()
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -277,7 +279,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Some Note
+" => Some Notes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Register Usage
 "	vim automatically uses the " register when yanking/deleting etc
@@ -292,8 +294,15 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " <paste somewhere out of vim normally>
 
 
+" Convert to hex from binary for editing
+"	:%!xxd
+" Convert file back to binary
+"	:%!xxd -r
+
+
 " Help
 " :help i_^n
 	" show what control-n does in insert mode
 " :helpgrep windows
 	" finds every possible entry for 'windows' in entire manual
+	"

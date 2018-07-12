@@ -7,3 +7,5 @@ set colorcolumn=80
 
 " colorscheme skittle-berry
 " colorscheme gruvbox
+
+echo "Hello this is java"
