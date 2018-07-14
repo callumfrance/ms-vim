@@ -1,6 +1,9 @@
 colorscheme birds-of-paradise
-set lines=60 columns=85
-set colorcolumn=81
+
+if !has("gui_macvim")
+	set lines=60 columns=85
+	set colorcolumn=81
+endif
 
 " language specific settings
 set tabstop=2
