@@ -95,7 +95,7 @@ if has("win32")
 endif
 
 " display indentation guides
-set list listchars=tab:\|\ ,trail:·
+set list listchars=tab:\|\ ,trail:âˆ™
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Searching
