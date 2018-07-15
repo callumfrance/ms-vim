@@ -1,5 +1,7 @@
 colorscheme birds-of-paradise
 
+let b:ale_linters = {'dart': []}
+
 if !has("gui_macvim")
 	set lines=60 columns=85
 	set colorcolumn=81
