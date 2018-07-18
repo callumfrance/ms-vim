@@ -37,6 +37,8 @@ Plugin 'lervag/vimtex'					"LaTeX settings for vim
 Plugin 'majutsushi/tagbar'				"tag sidebar
 Plugin 'w0rp/ale'						"linter
 Plugin 'dart-lang/dart-vim-plugin'		"support for Dart language syntax
+Plugin 'Yggdroot/indentLine'			"support for using spaces to indent
+
 
 call vundle#end()
 filetype plugin indent on
