@@ -1,4 +1,4 @@
-colorscheme sourcerer
+colorscheme onedark
 
 set tabstop=4 " tabstop can be 2, 3, or 4 in FORTRAN
 set colorcolumn=80 " fortran only goes up to 80 chars per line
