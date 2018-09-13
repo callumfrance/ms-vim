@@ -36,3 +36,4 @@ hi link ebnfSpecialSequence Statement
 hi link ebnfTerminal Constant
 
 colorscheme moss
+set colorcolumn=
