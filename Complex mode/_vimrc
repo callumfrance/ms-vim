@@ -167,7 +167,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee, *dart :call CleanExtraSpaces()
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*dart :call CleanExtraSpaces()
     autocmd BufWritePre *.md, :call LazyWP()
 endif
 
