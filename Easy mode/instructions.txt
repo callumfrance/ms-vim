@@ -1,22 +1,26 @@
 1. Download vim
+	If you are using an Apple computer, consider installing MacVim.
+	If you are using a Windows or Unix computer, gVim is choice.
 	http://www.vim.org/download.php#pc
 
 2. Install vim
 
-3. Ensure that you can open gVim.
+3. Ensure that you can open gVim or MacVim
 
 	gVim should open up like any other PC application - it's not terminal.
+	If you are on a Windows computer, it should look like utter dated trash. Don't worry, we will fix this.
+	You can open MacVim from the terminal by using `mvim`.
 
-4. Ensure that 'C:\Program Files (x86)\Vim' exists.
+4. Ensure that 'C:\Program Files (x86)\Vim' exists (for Windows) or YourHomeName/.vim exists (for MacOS)
 	
 	If not, check 'C:\Program Files\' to see if there is a Vim folder.
 
 	If there is no Vim folder, simply make a new folder called 'Vim' 
 	and place it in the 'Program File (x86)' directory.
 
-5. Copy '_vimrc' and '_gvimrc' and put them in the 'Vim' file
+5. Copy the '_vimrc' and '_gvimrc' in this github 'vim easy mode' folder and put them in the 'Vim' file
 
-6. Relaunch the gVim application.
+6. Relaunch the Vim application.
 
 
 It should all be working now.
@@ -25,15 +29,15 @@ It should all be working now.
 
 
 
-7. Read through the '_vimrc' and be sure to edit
+7. Read through the '_vimrc'. Be sure to have a look at the following settings in particular:
 	
 	'colorscheme'
 	'columns' and 'lines'
 	'visualbell'
 	
 	try commenting out
-	line 48 (listchars)
-	line 18 (errorbells)
+		- listchars
+		- rrorbells
 
 8. Adjust text size and font on line 5 of gvimrc
 
