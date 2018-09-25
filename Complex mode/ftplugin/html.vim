@@ -7,3 +7,4 @@ setlocal foldmethod=syntax
 bufdo syntax spell toplevel
 bufdo syn case ignore
 bufdo syn match htmlError "[<>&]"
+set colorcolumn=
