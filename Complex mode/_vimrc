@@ -18,10 +18,11 @@ if has("gui_macvim")
 	set rtp+=~/.vim/bundle/Vundle.vim				" used for mac
 	call vundle#begin()
 else
-	set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
+	" set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
+	set rtp+=C:\Users\Callum\CallumVimStuff\bundle\Vundle.vim
 	" set rtp+=$HOME/bundle/Vundle.vim/	  " used when Program Files cannot be edited without admin rights
-	" call vundle#begin('$HOME/bundle/') " $HOME is another drive which can be edited normally on this PC...
-	call vundle#begin('$HOME/.vim/bundle/')
+	call vundle#begin('$HOME/bundle/') " $HOME is another drive which can be edited normally on this PC...
+	" call vundle#begin('$HOME/.vim/bundle/')
 endif
 
 "Let vundle manage vundle
