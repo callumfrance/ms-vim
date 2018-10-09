@@ -54,7 +54,7 @@ filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
 set colorcolumn=80
-set background=dark
+" set background=dark " don't apply this setting in the vimrc for ALL colorschemes
 syntax enable
 set number
 set antialias				" smoother fonts
