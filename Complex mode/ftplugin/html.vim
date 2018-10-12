@@ -8,3 +8,5 @@ bufdo syntax spell toplevel
 bufdo syn case ignore
 bufdo syn match htmlError "[<>&]"
 set colorcolumn=
+set expandtab
+retab
