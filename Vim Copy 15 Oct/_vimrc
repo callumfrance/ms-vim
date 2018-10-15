@@ -1,0 +1,314 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" _vimrc
+" Callum France
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+
+if has("win32") " Windows 95 or later - 32 or 64 bits
+"	source $VIMRUNTIME/defaults.vim
+	source $VIMRUNTIME/mswin.vim
+	behave mswin
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off
+if has("gui_macvim")
+	set rtp+=~/.vim/bundle/Vundle.vim				" used for mac
+	call vundle#begin()
+else
+	" set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
+	set rtp+=$HOME/bundle/Vundle.vim/
+	call vundle#begin('$HOME/bundle/')
+endif
+
+"Let vundle manage vundle
+Plugin 'VundleVim/Vundle.vim'
+" vundle plugins go here
+Plugin 'mattn/emmet-vim'				" HTML settings
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes' " Status line themes
+Plugin 'flazz/vim-colorschemes'			" Colorschemes!!!
+Plugin 'vim-scripts/ScrollColors'		" Colour wheel
+Plugin 'ap/vim-css-color'				" css hex colour highlighting
+Plugin 'junegunn/goyo.vim'				" Comfortable page spacing
+" Plugin 'chrisbra/csv.vim'
+" Plugin 'ajh17/VimCompletesMe'			" Code completion
+" Plugin 'lervag/vimtex'					"LaTeX settings for vim
+" Plugin 'majutsushi/tagbar'				"tag sidebar
+" Plugin 'w0rp/ale'						"linter
+" Plugin 'dart-lang/dart-vim-plugin'		"support for Dart language syntax
+Plugin 'Yggdroot/indentLine'			"support for using spaces to indent
+
+
+call vundle#end()
+filetype plugin indent on
+filetype plugin on
+
+" Plugin 'Ron89/thesaurus_query.vim'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Styling
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme solarized
+" colorscheme solarized
+set colorcolumn=80
+set background=dark
+syntax enable
+set number
+set antialias				" smoother fonts
+set title					" gives window the title of file
+set wildmenu				" tab completion in NORM gives menu
+set synmaxcol=100			" max column syntax highlighing for
+set encoding=utf-8
+
+set noerrorbells
+set novisualbell
+" set belloff=all				" disable all bells
+set t_vb=
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Formatting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if has("gui_macvim")
+	set lines=40 columns=75
+else
+	set lines=50 columns=80
+	winpos 9999 2
+endif
+
+set tw=200					" Length of all columns
+" if wrapping enabled, wrap whole at the end of a word
+set linebreak
+" by default wrapping is disabled
+set nowrap
+set tabstop=4				" use 4 spaces for tabs
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab				" don't replace a tab with spaces
+set smarttab
+set smartindent				" autoindenting when starting new line
+set autoindent
+set shiftround				" indents rounded to a multiple
+
+if has("win32")
+	set laststatus=2			" always displays the status line
+	" Format the status line
+	" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+endif
+
+" display indentation guides
+" set list listchars=tab:\|\ ,trail:∙
+set list listchars=tab:\|\ ,
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Searching
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch
+set incsearch 				" don't constantly update search
+set ignorecase
+set smartcase
+set showmatch 				" briefly jump to matching bracket
+set path+=**				" searches down into subfolders
+" Note - use :find *<partOfFileName>	
+"		or :find <partOfFileName>* to fuzzy search a name
+" :b <unique_part_of_file_name>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => History
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set history=200
+set undolevels=200
+set nowritebackup
+set noswapfile
+set nobackup
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" this is the default mapleader anyway, but for posterity:
+let mapleader="\\"
+
+nnoremap ; :
+nnoremap <space> :w<CR>:nohl<CR>
+command WQ wq
+command Wq wq
+command W w
+command Q q
+" maps normal-mode <tab> key to switching windows
+nnoremap <tab> <C-W>w
+" normal-mode backspace to switch into other direction
+nnoremap <bs> <C-W>W
+
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+	" expands on tab edit
+" maps the F3 key to file viewer
+nnoremap <F3> :Explore<CR> 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Folds
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldmethod=marker
+set foldmarker={,}
+" opens all folds automatically on file start
+set nofoldenable
+set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => White Space Deletion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.js,*.py,*.wiki,*.sh,*.coffee, *dart :call CleanExtraSpaces()
+    autocmd BufWritePre *.md, :call LazyWP()
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Reloading _vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
+autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_configs.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Omni complete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" find info in |ins-completion|
+" ^x^n for just the file
+" ^x^f for filenames
+" ^x^] for tags only
+" ^n for anything specified by the 'complete' option
+" (use ^n and ^p to go back and forth in the suggested list)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ctags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Note - this will only work if the PC has 'ctags' on it
+" https://github.com/universal-ctags/ctags
+command! MakeTags !ctags -R .
+	" use ^] to jump to tag under cursor
+	" use g^] for ambiguous tags
+	" use ^t to jump back up tag stack
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin: Airline Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#format = 0      " only shows file name
+let g:airline_theme='distinguished'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Word Processor
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" `:call WP()`      opens the word processor mode
+" `z=`              displays corrections
+" `zg`              adds words to dictionary
+function! WP()
+    setlocal noexpandtab
+    setlocal formatoptions=1
+    map j gj
+    map k gk
+    setlocal formatprg=par
+    setlocal wrap
+    setlocal linebreak			" line wraps don't break up words
+	set colorcolumn=
+
+	set guioptions-=r
+	set guioptions-=l
+
+    setlocal spellfile="C:\Program Files (x86)\Vim\vimfiles\spell\en.utf-8.add"
+    setlocal spell spelllang=en_au      " http://vimdoc.sourceforge.net/htmldoc/spell.html
+	setlocal syntax=off
+	retab
+
+    Goyo 95%x95%-2%             " margins
+
+	if has("gui_macvim")
+		" setlocal formatprg=par
+		setlocal guifont=Monaco:h12
+		colorscheme Benokai
+		setlocal lines=42 columns=83
+	else
+		colorscheme pencil
+		setlocal lines=65 columns=90
+	endif
+endfunction
+
+function! LazyWP()
+    setlocal noexpandtab
+    setlocal formatoptions=1
+    map j gj
+    map k gk
+    setlocal formatprg=par
+    setlocal wrap
+    setlocal linebreak			" line wraps don't break up words
+	set colorcolumn=
+
+	if has("gui_macvim")
+		setlocal lines=41 columns=65
+		colorscheme gruvbox
+	else
+		colorscheme materialtheme
+		" setlocal lines=65 columns=90
+	endif
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tagbar_left=1			" thingy is on the left not right
+let g:tagbar_expand=1		" increases window width
+
+nnoremap <silent> <F6> :TagbarToggle<CR>
+nnoremap <silent> <F5> :TagbarOpenAutoClose<CR>
+
+" autocmd FileType c,java,python nested :call tagbar#autoopen(1)
+	"nested :TagbarOpen
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ALE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#ale#enable=1
+let g:ale_completion_delay=1000
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Some Notes
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Register Usage
+"	vim automatically uses the " register when yanking/deleting etc
+
+" "add
+" "bdd
+" "ap
+" "bp
+
+" + and * register connect to system keyboard
+" "+yy
+" <paste somewhere out of vim normally>
+
+
+" Convert to hex from binary for editing
+"	:%!xxd
+" Convert file back to binary
+"	:%!xxd -r
+
+
+" Help
+" :help i_^n
+	" show what control-n does in insert mode
+" :helpgrep windows
+	" finds every possible entry for 'windows' in entire manual
+	"
