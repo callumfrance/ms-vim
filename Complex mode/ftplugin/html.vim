@@ -1,7 +1,8 @@
 " html file settings
-EmmetInstall
+" EmmetInstall
 set lines=50 columns=92
-setlocal tabstop=2
+set tabstop=2
+set shiftwidth=2
 bufdo colorscheme Tomorrow-Night-Eighties
 setlocal foldmethod=syntax
 bufdo syntax spell toplevel

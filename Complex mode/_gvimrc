@@ -37,7 +37,9 @@ if has("gui_running")
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" => Font and Cursor
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	set guifont=Hack:h10 				" font and font size
+	" set guifont=Source_Code_Pro_SemiBold:h10:cANSI:qDRAFT 				" font and font size
+	" set guifont=Source_Code_Pro_SemiBold:h10
+	set guifont=Consolas:h11
 
 	set guicursor+=n-v-c:blinkon0		" cursor doesn't blink
 
@@ -72,3 +74,4 @@ if has("gui_macvim")
 	set guifont=Monaco:h13
 	set guicursor+=n-v-c:blinkon0		" cursor doesn't blink
 endif
+set shortmess=a

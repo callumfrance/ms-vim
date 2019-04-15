@@ -5,12 +5,10 @@
 set nocompatible
 
 if has("win32") " Windows 95 or later - 32 or 64 bits
-"	source $VIMRUNTIME/defaults.vim
+	source $VIMRUNTIME/defaults.vim
 	source $VIMRUNTIME/mswin.vim
 	behave mswin
 endif
-
-set rtp+=I:\Vim\vimfiles
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
@@ -20,28 +18,27 @@ if has("gui_macvim")
 	set rtp+=~/.vim/bundle/Vundle.vim				" used for mac
 	call vundle#begin()
 else
-	" set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
-	set rtp+=$HOME/bundle/Vundle.vim/
-	call vundle#begin('$HOME/bundle/')
+	set rtp+=$HOME/.vim/bundle/Vundle.vim/	" used for windows
+	call vundle#begin('$HOME/.vim/bundle/')
 endif
 
 "Let vundle manage vundle
 Plugin 'VundleVim/Vundle.vim'
 " vundle plugins go here
 Plugin 'mattn/emmet-vim'				" HTML settings
-Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'		" Status line
 Plugin 'vim-airline/vim-airline-themes' " Status line themes
 Plugin 'flazz/vim-colorschemes'			" Colorschemes!!!
 Plugin 'vim-scripts/ScrollColors'		" Colour wheel
 Plugin 'ap/vim-css-color'				" css hex colour highlighting
 Plugin 'junegunn/goyo.vim'				" Comfortable page spacing
-" Plugin 'chrisbra/csv.vim'
-" Plugin 'ajh17/VimCompletesMe'			" Code completion
-" Plugin 'lervag/vimtex'					"LaTeX settings for vim
-" Plugin 'majutsushi/tagbar'				"tag sidebar
-" Plugin 'w0rp/ale'						"linter
-" Plugin 'dart-lang/dart-vim-plugin'		"support for Dart language syntax
+Plugin 'ajh17/VimCompletesMe'			" Code completion
+Plugin 'lervag/vimtex'					"LaTeX settings for vim
+Plugin 'majutsushi/tagbar'				"tag sidebar
+Plugin 'w0rp/ale'						"linter
+Plugin 'dart-lang/dart-vim-plugin'		"support for Dart language syntax
 Plugin 'Yggdroot/indentLine'			"support for using spaces to indent
+Plugin 'vim-scripts/ebnf.vim'
 
 
 call vundle#end()
@@ -54,12 +51,11 @@ filetype plugin on
 " => Styling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme solarized
-" colorscheme solarized
 set colorcolumn=80
 set background=dark
-" syntax enable
+syntax enable
 set number
-" set antialias				" smoother fonts
+set antialias				" smoother fonts
 set title					" gives window the title of file
 set wildmenu				" tab completion in NORM gives menu
 set synmaxcol=100			" max column syntax highlighing for
@@ -67,7 +63,7 @@ set encoding=utf-8
 
 set noerrorbells
 set novisualbell
-" set belloff=all				" disable all bells
+set belloff=all				" disable all bells
 set t_vb=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,12 +73,11 @@ set t_vb=
 if has("gui_macvim")
 	set lines=40 columns=75
 else
-	" set lines=50 columns=80
-	set lines=35 columns=80
-	"winpos 9999 2
+	set lines=55 columns=80
+	winpos 9999 2
 endif
 
-" set tw=200					" Length of all columns
+set tw=200					" Length of all columns
 " if wrapping enabled, wrap whole at the end of a word
 set linebreak
 " by default wrapping is disabled
@@ -103,8 +98,7 @@ if has("win32")
 endif
 
 " display indentation guides
-" set list listchars=tab:\|\ ,trail:∙
-set list listchars=tab:\|\ ,
+set list listchars=tab:\|\ ,trail:∙
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Searching
@@ -114,7 +108,7 @@ set incsearch 				" don't constantly update search
 set ignorecase
 set smartcase
 set showmatch 				" briefly jump to matching bracket
-" set path+=**				" searches down into subfolders
+set path+=**				" searches down into subfolders
 " Note - use :find *<partOfFileName>	
 "		or :find <partOfFileName>* to fuzzy search a name
 " :b <unique_part_of_file_name>
@@ -153,46 +147,39 @@ nnoremap <F3> :Explore<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folds
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set foldmethod=marker
-" set foldmarker={,}
-" " opens all folds automatically on file start
-" set nofoldenable
-" set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
+set foldmethod=marker
+set foldmarker={,}
+" opens all folds automatically on file start
+set nofoldenable
+set foldtext=v:folddashes.substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => White Space Deletion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save, useful for some filetypes ;)
-" fun! CleanExtraSpaces()
-"     let save_cursor = getpos(".")
-"     let old_query = getreg('/')
-"     silent! %s/\s\+$//e
-"     call setpos('.', save_cursor)
-"     call setreg('/', old_query)
-" endfun
-" 
-" if has("autocmd")
-"     autocmd BufWritePre *.js,*.wiki,*.sh,*.coffee, *dart :call CleanExtraSpaces()
-"     autocmd BufWritePre *.md, :call LazyWP()
-" endif
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.js,*.py,*.wiki,*.sh,*.coffee, *dart :call CleanExtraSpaces()
+    autocmd BufWritePre *.md, :call LazyWP()
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Reloading _vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
-" autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_configs.vim
+map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
+autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_configs.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Omni complete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" filetype plugin on
-" set omnifunc=syntaxcomplete#complete
-" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-" autocmd FileType python set omnifunc=python3complete#Complete
-" 
-" " remap
-" inoremap <tab> <C-X><C-O>
-
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " find info in |ins-completion|
 " ^x^n for just the file
 " ^x^f for filenames
@@ -214,7 +201,7 @@ command! MakeTags !ctags -R .
 " => Plugin: Airline Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#format = 0      " only shows file name
+let g:airline#extensions#branch#format = 1      " only shows file name
 let g:airline_theme='distinguished'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,11 +275,11 @@ nnoremap <silent> <F5> :TagbarOpenAutoClose<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:airline#extensions#ale#enable=1
-" let g:ale_completion_delay=1000
-" 
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:airline#extensions#ale#enable=1
+let g:ale_completion_delay=1000
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Some Notes
@@ -315,18 +302,10 @@ nnoremap <silent> <F5> :TagbarOpenAutoClose<CR>
 " Convert file back to binary
 "	:%!xxd -r
 
+
 " Help
 " :help i_^n
 	" show what control-n does in insert mode
 " :helpgrep windows
 	" finds every possible entry for 'windows' in entire manual
-
-
-
-set cmdheight=1
-set shortmess=at
-set noshowcmd
-silent!
-syntax on
-set expandtab
-retab
+	"

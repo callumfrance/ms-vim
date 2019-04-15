@@ -4,3 +4,11 @@ EmmetInstall
 setlocal tabstop=2
 setlocal foldmethod=manual
 colorscheme Revolution
+
+" CSS Omnicomplete
+
+filetype plugin on
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+" remap
+inoremap <tab> <C-X><C-O>

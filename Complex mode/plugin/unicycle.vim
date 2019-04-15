@@ -170,6 +170,6 @@ function! UniCycleOff()
 	iunmap "
 endfunction
 
-command UniCycleOn call UniCycleOn()
-command UniCycleOff call UniCycleOff()
+"command UniCycleOn call UniCycleOn()
+"command UniCycleOff call UniCycleOff()
 
